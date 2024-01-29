@@ -5,12 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public string sceneToLoad;
-    private void OnTriggerEnter(Collider other)
+    public void ChangeLevel(string sceneName)
     {
-        if (other.CompareTag("Player"))
+        SceneManager.LoadScene(sceneName); // Cambio de escena
+    }
+    public void Salida()
+    {
+        Application.Quit(); // Salimos de la aplicacion
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            Application.Quit(); // Salimos de la aplicacion
         }
     }
 }
