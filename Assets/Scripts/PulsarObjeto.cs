@@ -24,3 +24,4 @@ public class PulsarObjeto : MonoBehaviour
 
 
 
+
