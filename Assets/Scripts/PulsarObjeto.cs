@@ -8,8 +8,9 @@ public class PulsarObjeto : MonoBehaviour
     public string sceneName;
     public Canvas canvasSuperposicion;
 
-    private void OnMouseDown()
+    public void OnMouseDown ()
     {
+       
         SceneManager.LoadScene(sceneName);
     }
     private void OnMouseOver()
