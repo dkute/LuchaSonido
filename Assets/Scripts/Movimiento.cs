@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
-    Rigidbody2D rb2d;
-    SpriteRenderer spRd;
+    private Rigidbody2D body;
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
+    
 
-    public float velMov = 5f;
+    public float velMov = 25f;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
+
     void Update()
     {
         float movimientoH = Input.GetAxis("Horizontal");
@@ -24,17 +28,6 @@ public class Movimiento : MonoBehaviour
         walk(movimientoH);
     }
 
-    private void GiroHorizontal(float movimientoH)
-    {
-        if (movimientoH > 0)
-        {
-            spRd.flipX = false;
-        }
-        else if (movimientoH < 0)
-        {
-            spRd.flipY = true;
-        }
-    }
     private void walk(float movimientoH)
     {
         if (movimientoH != 0)
@@ -45,6 +38,12 @@ public class Movimiento : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //body.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+        spriteRenderer.flipX = body.velocity.x < 0f;
     }
 }
 
