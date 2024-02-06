@@ -3,8 +3,8 @@ using UnityEngine;
 public class MandoSet : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip[] notes;
-    private AudioSource audioSrc;
+    static public AudioClip[] notes;
+    static public AudioSource audioSrc;
 
     private void Start()
     {
@@ -17,26 +17,61 @@ public class MandoSet : MonoBehaviour
         switch (noteName)
         {
             case "A":
-                audioSrc.PlayOneShot(notes[0]);
+                A();
                 break;
             case "B":
-                audioSrc.PlayOneShot(notes[1]);
+                B();
                 break;
             case "C":
-                audioSrc.PlayOneShot(notes[2]);
+                C();
                 break;
             case "D":
-                audioSrc.PlayOneShot(notes[3]);
+                D();
                 break;
             case "E":
-                audioSrc.PlayOneShot(notes[4]);
+                E();
                 break;
             case "F":
-                audioSrc.PlayOneShot(notes[5]);
+                F();
                 break;
             case "G":
-                audioSrc.PlayOneShot(notes[6]);
+                G();
                 break;
         }
+    }
+
+    private static void G()
+    {
+        audioSrc.PlayOneShot(notes[6]);
+    }
+
+    private static void F()
+    {
+        audioSrc.PlayOneShot(notes[5]);
+    }
+
+    private static void E()
+    {
+        audioSrc.PlayOneShot(notes[4]);
+    }
+
+    private static void D()
+    {
+        audioSrc.PlayOneShot(notes[3]);
+    }
+
+    private static void C()
+    {
+        audioSrc.PlayOneShot(notes[2]);
+    }
+
+    private static void B()
+    {
+        audioSrc.PlayOneShot(notes[1]);
+    }
+
+    static public void A()
+    {
+        audioSrc.PlayOneShot(notes[0]);
     }
 }

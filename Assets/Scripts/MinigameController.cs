@@ -9,7 +9,7 @@ public class MinigameController : MonoBehaviour
 
     static int gameMax;
     static float gameTime;
-
+    static public int rand;
     static List<int> userList, gameList;
 
     public static bool GameisWorking;
@@ -51,7 +51,7 @@ public void PlayerAction(ButtonB b)
         for (int i = 0; i < gameMax; i++)
         {
 
-            int rand = Random.Range(0, 4);
+            rand = Random.Range(0, 6);
             gameList.Add(rand);
             btns[rand].Action();
 

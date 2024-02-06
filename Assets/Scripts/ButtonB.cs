@@ -15,13 +15,15 @@ public class ButtonB : MonoBehaviour
     {
         if (!MinigameController.GameisWorking)
         {
-            Action();
+            Action(MinigameController.rand);
             MinigameController.Instance.PlayerAction(this);
         }
     }
-    public void Action()
+    public void Action(MinigameController.rand)
     {
         anim.enabled = true;
         anim.SetTrigger("pop");
+        MandoSet.A();
+      
     }
 }
