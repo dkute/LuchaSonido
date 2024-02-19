@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonB : MonoBehaviour
-{
-    public int id;
-    public Animator anim;
+//public class ButtonB : MonoBehaviour
+//{
+   // public int id;
+   // public Animator anim;
 
-    private void Start()
+   // private void Start()
+   // {
+   //     id = transform.GetSiblingIndex();
+   // }
+   // private void OnMouseDown()
     {
-        id = transform.GetSiblingIndex();
-    }
-    private void OnMouseDown()
-    {
-        if (!MinigameController.GameisWorking)
+    //    if (!MGameController.GameisWorking)
         {
-            Action(MinigameController.rand);
-            MinigameController.Instance.PlayerAction(this);
+   //         Action(MGameController.rand);
+    //        MGameController.Instance.PlayerAction(this);
         }
     }
-    public void Action(MinigameController.rand)
+   // public void Action(MGameController.rand)
     {
-        anim.enabled = true;
-        anim.SetTrigger("pop");
-        MandoSet.A();
+    //    anim.enabled = true;
+    //    anim.SetTrigger("pop");
+     //   MandoSet.A();
       
     }
-}
+//}

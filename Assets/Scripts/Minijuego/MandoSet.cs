@@ -12,7 +12,7 @@ public class MandoSet : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
     }
 
-    private void PlaySound(string noteName)
+    private static void PlaySound(string noteName)
     {
         switch (noteName)
         {

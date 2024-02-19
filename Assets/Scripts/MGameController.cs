@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigameController : MonoBehaviour
+public class MGameController : MonoBehaviour
 {
-    public static MinigameController Instance;
+    public static MGameController Instance;
     public ButtonB[] btns;
 
     static int gameMax;
@@ -24,22 +24,22 @@ public class MinigameController : MonoBehaviour
 
         StartCoroutine(MinigameControl());
     }
-    
-public void PlayerAction(ButtonB b)
+
+    public void PlayerAction(ButtonB b)
     {
         userList.Add(b.id);
 
-        if (userList[userList.Count-1] != gameList [userList.Count-1])
+        if (userList[userList.Count - 1] != gameList[userList.Count - 1])
         {
             Start();
             Debug.Log("Loose");
         }
-        else if(userList.Count == gameList.Count)
+        else if (userList.Count == gameList.Count)
         {
             Debug.Log("Next Level");
             StartCoroutine(MinigameControl());
         }
-    } 
+    }
     IEnumerator MinigameControl()
     {
         Debug.Log("Prepare");
