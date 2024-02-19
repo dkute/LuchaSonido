@@ -20,4 +20,5 @@ public class ChangeScene : MonoBehaviour
             Application.Quit(); // Salimos de la aplicacion
         }
     }
+   
 }
