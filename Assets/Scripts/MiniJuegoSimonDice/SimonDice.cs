@@ -41,34 +41,42 @@ public class SimonDice : MonoBehaviour
 
         while (true)
         {
+            canvasSuperposicion.SetActive.WaitForSecond(false);
             // Agrega una nueva nota aleatoria a la secuencia
             int nuevaNota = Random.Range(0, notas.Length);
             secuenciaNotas.Add(nuevaNota);
 
             // Reproduce la secuencia actual de notas
-            foreach (int nota in secuenciaNotas)
-            {
-                ReproducirNota(nota);
-                yield return new WaitForSeconds(1.5f); // Retardo entre notas
-            }
+            yield return ReproducirSecuencia();
 
             jugadorTurno = true; // Es el turno del jugador
             yield return new WaitForSeconds(1f); // Retardo antes de que el jugador pueda comenzar a replicar la secuencia
             yield return new WaitUntil(() => indexSecuencia >= secuenciaNotas.Count); // Espera a que el jugador complete la secuencia
-            //if (!ComprobarSecuencia())
-            //{
-               // Debug.Log("Has cometido un error Repitiendo secuencia!...");
-               // secuenciaNotas.Clear();
-                //indexSecuencia = 0;
-               // yield return new WaitForSeconds(1f);
-            //}
+            if (!ComprobarSecuencia())
+            {
+                Debug.Log("Has cometido un error Repitiendo secuencia!...");
+                secuenciaNotas.Clear();
+                indexSecuencia = 0;
+                yield return new WaitForSeconds(1f);
+            }
 
-            // Reinicia el índice para la siguiente ronda
-            //indexSecuencia = 0;
+             //Reinicia el índice para la siguiente ronda
+            indexSecuencia = 0;
 
-            //jugadorTurno = false; // La secuencia se está reproduciendo nuevamente
+            jugadorTurno = false; // La secuencia se está reproduciendo nuevamente
         }
     }
+
+    IEnumerator ReproducirSecuencia()
+    {
+        foreach (int nota in secuenciaNotas)
+        {
+            
+            ReproducirNota(nota);
+            yield return new WaitForSeconds(1.5f); // Retardo entre notas
+        }
+    }
+  
 
     void ReproducirNota(int indice)
     {
@@ -76,19 +84,20 @@ public class SimonDice : MonoBehaviour
         AudioSource.PlayClipAtPoint(notas[indice], transform.position);
     }
 
-    //bool ComprobarSecuencia()
-    //{
-        //for (int i = 0; i < secuenciaNotas.Count; i++)
-        //{
-            //if (secuenciaNotas[i] != secuenciaJugador[i])
-            //{
-               // canvasSuperposicion.SetActive(true);
-                //return false;
-            //}
-        //}
-        //return true;
+   
+    bool ComprobarSecuencia()
+    {
+        for (int i = 0; i < secuenciaNotas.Count; i++)
+        {
+            if (secuenciaNotas[i] != secuenciaJugador[i])
+            {
+               canvasSuperposicion.SetActive(true);
+               return false;
+            }
+        }
+       return true;
         
-    //}
+    }
 
     public void NotaPresionada(int indice)
     {
@@ -109,9 +118,9 @@ public class SimonDice : MonoBehaviour
                
                 canvasSuperposicion.SetActive(true);
                 // El jugador cometió un error, puedes agregar aquí la lógica para manejarlo
-                //Debug.Log("¡Has perdido! Intenta de nuevo.");
+                Debug.Log("¡Has perdido! Intenta de nuevo.");
                 secuenciaNotas.Clear(); // Reinicia la secuencia para comenzar de nuevo
-                StartCoroutine(IniciarSecuencia()); // Reinicia el juego
+                StartCoroutine(ReproducirSecuencia()); // Reinicia el juego
             }
             
         }
