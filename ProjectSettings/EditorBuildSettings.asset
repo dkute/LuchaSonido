@@ -14,11 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Studio.unity
     guid: 8c6b2faffee935946976650a82aec58f
-  - enabled: 1
-    path: Assets/Scenes/Menu Mp3.unity
-    guid: c2fb9bfb6c397f64aa7261f3232fea1a
-  - enabled: 1
-    path: Assets/Scenes/Inicio.unity
-    guid: d9605f25cab25e74b9c4277d57165238
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 9d078a7f9cbbccf4384aa4794f346cec, type: 2}
