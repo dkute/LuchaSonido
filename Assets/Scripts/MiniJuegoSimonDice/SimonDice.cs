@@ -22,11 +22,13 @@ public class SimonDice : MonoBehaviour
 
     private int notasResponder = 1; //numero de notas que el jugador debe responder
     private int notasRespondidas = 0; //notas que el jugador ha respondido
+    private int intentos = 0; //numero de intentos/aciertos? del jugador
+    private int fallos = 0; //numero de fallos
     void Start()
     {
         canvasSuperposicion.SetActive(false);
         // Inicia el juego
-        StartCoroutine(IniciarSecuencia());
+        //StartCoroutine(IniciarSecuencia());
         A.onClick.AddListener(() => NotaPresionada(0));
         A.onClick.AddListener(() => NotaPresionada(1));
         B.onClick.AddListener(() => NotaPresionada(2));
@@ -35,6 +37,7 @@ public class SimonDice : MonoBehaviour
         E.onClick.AddListener(() => NotaPresionada(5));
         F.onClick.AddListener(() => NotaPresionada(6));
         G.onClick.AddListener(() => NotaPresionada(7));
+        StartCoroutine(IniciarSecuencia());
 
     }
 
@@ -42,11 +45,11 @@ public class SimonDice : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // Retardo inicial antes de iniciar la secuencia
         secuenciaNotas.Add(Random.Range(0, notas.Length));
-        while (true)
+        while (intentos < 3 && fallos < 3) //limita el  juego a 3 intentos
         {
             canvasSuperposicion.SetActive(false);
             secuenciaJugador.Clear();
-            notasRespondidas = 0;
+            notasRespondidas = 0; //establece el numero de notas que el jugador debe responder
             notasResponder = secuenciaNotas.Count + 1;
 
             // Agrega una nueva nota aleatoria a la secuencia
@@ -58,7 +61,7 @@ public class SimonDice : MonoBehaviour
             // Reproduce la secuencia actual de notas
             yield return ReproducirSecuencia();
 
-            jugadorTurno = true; // Es el turno del jugador
+            //jugadorTurno = true; // Es el turno del jugador
             //yield return new WaitUntil(1f); // Retardo antes de que el jugador pueda comenzar a replicar la secuencia
             //yield return new WaitUntil(() => indexSecuencia >= secuenciaNotas.Count); // Espera a que el jugador complete la secuencia
             jugadorTurno = true;
@@ -68,9 +71,11 @@ public class SimonDice : MonoBehaviour
 
             if (!ComprobarSecuencia())
             {
+                fallos++; //incrementa el contador de fallos 
                 Debug.Log("Has cometido un error Repitiendo secuencia!...");
-                secuenciaNotas.Clear();
-                indexSecuencia = 0;
+                //secuenciaNotas.Clear();
+                canvasSuperposicion.SetActive(true);
+                //indexSecuencia = 0;
                 
                 yield return new WaitForSeconds(1f);
             }
@@ -79,12 +84,22 @@ public class SimonDice : MonoBehaviour
                 // Avanza al siguiente nivel si el jugador ha respondido correctamente todas las notas
                 indexSecuencia = 0;
                 secuenciaNotas.Add(Random.Range(0, notas.Length));
+                yield return new WaitForSeconds(1f);
             }
 
              //Reinicia el índice para la siguiente ronda
             //indexSecuencia = 0;
 
             jugadorTurno = false; // La secuencia se está reproduciendo nuevamente
+        }
+        // Comprueba si el jugador ha ganado o perdido después de 3 intentos
+        if (intentos >= 3 || fallos >= 3)
+        {
+            Debug.Log("Juego terminado. Has alcanzado el límite de intentos. ¡Intenta de nuevo!");
+        }
+        else
+        {
+            Debug.Log("¡Has ganado! Completaste la secuencia.");
         }
     }
 
@@ -136,6 +151,7 @@ public class SimonDice : MonoBehaviour
                 {
                     canvasSuperposicion.SetActive(true);
                     Debug.Log("¡Has perdido! Intenta de nuevo.");
+                    fallos++; //incrementa el contador de fallos
                     secuenciaNotas.Clear();
                     StartCoroutine(ReproducirSecuencia());
                 }
