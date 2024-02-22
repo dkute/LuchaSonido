@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//hola saray
 public class SimonDice : MonoBehaviour
 {
     public AudioClip[] notas; // Array que contiene los sonidos de las notas
@@ -71,7 +71,7 @@ public class SimonDice : MonoBehaviour
                 Debug.Log("Has cometido un error Repitiendo secuencia!...");
                 secuenciaNotas.Clear();
                 indexSecuencia = 0;
-                canvasSuperposicion.SetActive(true);
+                
                 yield return new WaitForSeconds(1f);
             }
             else
