@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 //hola saray
 public class SimonDice : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class SimonDice : MonoBehaviour
     private bool jugadorTurno = false; // Variable para rastrear si es el turno del jugador
     private List<int> secuenciaJugador = new List<int>();
     public  GameObject  canvasSuperposicion;
+    public GameObject canvasVictoria;
+    public GameObject canvasDerrota;
+    public TMP_Text aciertosText;
+    public TMP_Text fallosText;
 
     public Button A;
     public Button B;
@@ -95,10 +100,16 @@ public class SimonDice : MonoBehaviour
         // Comprueba si el jugador ha ganado o perdido después de 3 intentos
         if (intentos >= 3 || fallos >= 3)
         {
+            canvasSuperposicion.SetActive(false);
+            canvasDerrota.SetActive(true);
+            puntuacionText.text = "Tu puntuación: " + (secuenciaNotas.Count - fallos);
             Debug.Log("Juego terminado. Has alcanzado el límite de intentos. ¡Intenta de nuevo!");
         }
         else
         {
+            canvasSuperposicion.SetActive(false);
+            canvasVictoria.SetActive(true);
+            puntuacionText.text = "Tu puntuación: " + secuenciaNotas.Count;
             Debug.Log("¡Has ganado! Completaste la secuencia.");
         }
     }
@@ -127,10 +138,12 @@ public class SimonDice : MonoBehaviour
         {
             if (secuenciaNotas[i] != secuenciaJugador[i])
             {
+                fallosText.text = "Fallos " + fallos.ToString();
                 //canvasSuperposicion.SetActive(true);
                return false;
             }
         }
+        aciertosText.text = "Aciertos: " + secuenciaNotas.Count.ToString();
        return true;
         
     }
@@ -139,6 +152,7 @@ public class SimonDice : MonoBehaviour
     {
         if (jugadorTurno)
         {
+           // ReproducirNota(indide);
             secuenciaJugador.Add(indice);
             notasRespondidas++;
             // Comprueba si la nota presionada por el jugador coincide con la siguiente nota en la secuencia
@@ -152,6 +166,7 @@ public class SimonDice : MonoBehaviour
                     canvasSuperposicion.SetActive(true);
                     Debug.Log("¡Has perdido! Intenta de nuevo.");
                     fallos++; //incrementa el contador de fallos
+                    fallosText.text = "Fallos: " + fallos.ToString(); //actualiza el texto
                     secuenciaNotas.Clear();
                     StartCoroutine(ReproducirSecuencia());
                 }
