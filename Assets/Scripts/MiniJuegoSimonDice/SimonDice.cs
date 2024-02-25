@@ -55,15 +55,12 @@ public class SimonDice : MonoBehaviour
 
     IEnumerator RealizarJuego()
     {
-        Debug.Log("Iniciando juego...");
-
+        // Reproducir la primera nota antes de entrar en el bucle de juego
         ReproducirNota(Random.Range(0, notas.Length));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); // Puedes ajustar el tiempo según sea necesario
 
         while (intentos < 3 && fallos < 3)
         {
-            Debug.Log("Nuevo turno...");
-
             canvasSuperposicion.SetActive(false);
             secuenciaJugador.Clear();
             notasRespondidas = 0;
@@ -78,9 +75,7 @@ public class SimonDice : MonoBehaviour
             {
                 fallos++;
                 fallosText.text = "Fallos: " + fallos.ToString();
-                puntuacionText.text = "Vuelve a intentar, eres un incompetente";
                 MostrarMensajeSuperposicion("Vuelve a intentar");
-                Debug.Log("Error en la secuencia. Fallos: " + fallos);
                 yield return new WaitForSeconds(1.5f);
             }
             else
@@ -92,7 +87,6 @@ public class SimonDice : MonoBehaviour
 
             jugadorTurno = false;
             canvasSuperposicion.SetActive(true);
-            Debug.Log("Fin del turno del jugador. Mostrando mensaje de superposición.");
             yield return new WaitForSeconds(1.5f);
             canvasSuperposicion.SetActive(false);
         }
@@ -131,17 +125,11 @@ public class SimonDice : MonoBehaviour
             if (secuenciaNotas[i] != secuenciaJugador[i])
             {
                 fallosText.text = "Fallos: " + fallos.ToString();
-                puntuacionText.text = "Eres un incompetente, vuelve a intentar";
-                MostrarMensajeSuperposicion("Vuelve a intentar");
-                Debug.Log("Error en la secuencia. Fallos: " + fallos);
                 return false;
             }
-
         }
 
         aciertosText.text = "Aciertos: " + secuenciaNotas.Count.ToString();
-        MostrarMensajeSuperposicion("Correcto");
-        Debug.Log("Secuencia correcta. Aciertos: " + secuenciaNotas.Count);
         return true;
     }
 
@@ -168,15 +156,7 @@ public class SimonDice : MonoBehaviour
 
     void MostrarMensajeSuperposicion(string mensaje)
     {
-        TMP_Text mensajeText = canvasSuperposicion.GetComponentInChildren<TMP_Text>();
-
-        if (mensajeText != null)
-        {
-            mensajeText.text = mensaje;
-        }
-        else
-        {
-            Debug.LogError("No se encontró un componente TextMeshProUGUI en el canvas de superposición.");
-        }
+        // Implementa la lógica para mostrar el mensaje en tu canvas de superposición
+        // Puedes acceder a los elementos de texto o imágenes de tu canvas y actualizarlos según sea necesario
     }
 }
