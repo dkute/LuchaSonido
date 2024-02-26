@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 027b050323e3a5c4baa7053539b54522
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - canvasSuperposicion: {instanceID: 0}
+  - A: {fileID: 5016375104307282095, guid: e53074258c6f99c468e8ebe6c7ede4b9, type: 3}
+  - B: {fileID: 3389807669159377025, guid: 593d133a4e9f63e47830541a46dcd0ef, type: 3}
+  - C: {fileID: 6034551597862857373, guid: 5bf62f713a8ecf44f998c72971033aca, type: 3}
+  - D: {fileID: 4023532651357285474, guid: e0904a96dd0c8f445913513f170349fe, type: 3}
+  - E: {fileID: 6310135315318359718, guid: 4cbada9765eea5947bbd98e08dc69dd9, type: 3}
+  - F: {fileID: 7671837545335236572, guid: f9b8bf560232966499462c32064b8219, type: 3}
+  - G: {fileID: 7867658538250511754, guid: ee1fdea260153314e90d041b98552f0d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
