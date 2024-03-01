@@ -7,6 +7,7 @@ public class PulsarObjeto : MonoBehaviour
 {
     public string sceneName;
     public string sceneName2;
+    public string SceneName3;
     public Canvas canvasSuperposicion;
     public Canvas canvasSuperposicion2;
     public Canvas canvasSuperposicion3;
@@ -21,6 +22,11 @@ public class PulsarObjeto : MonoBehaviour
         SceneManager.LoadScene(sceneName2);
 
     }
+    public void cambiarScene3()
+    {
+        SceneManager.LoadScene(SceneName3);
+    }
+
 
     public void canvasEnergia()
     {
